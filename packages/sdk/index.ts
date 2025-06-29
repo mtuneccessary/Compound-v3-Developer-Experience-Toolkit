@@ -13,4 +13,8 @@ export async function getAccountInfo(provider: ethers.JsonRpcProvider, account: 
   const contract = new ethers.Contract(contractAddress, contractABI, provider);
   const accountInfo = await contract.getAccountInfo(account);
   return accountInfo;
-} 
+}
+
+export * from './src/CompoundV3';
+export * from './src/types';
+export * from './src/constants/addresses'; 
