@@ -4,11 +4,25 @@
   "description": "SDK for interacting with Compound v3 protocol",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc",
     "test": "jest",
     "clean": "rm -rf dist",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/compound-developers/compound-v3-developer-toolkit.git",
+    "directory": "packages/sdk"
   },
   "keywords": [
     "compound",
@@ -16,7 +30,7 @@
     "ethereum",
     "web3"
   ],
-  "author": "",
+  "author": "Compound Labs, Inc.",
   "license": "MIT",
   "dependencies": {
     "ethers": "^6.11.1"

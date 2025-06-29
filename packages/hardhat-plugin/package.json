@@ -1,13 +1,28 @@
 {
-  "name": "hardhat-compound3",
+  "name": "@compound-v3/hardhat-plugin",
   "version": "0.1.0",
   "description": "Hardhat plugin for Compound v3 development",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc",
     "test": "jest",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/compound-developers/compound-v3-developer-toolkit.git",
+    "directory": "packages/hardhat-plugin"
   },
   "keywords": [
     "ethereum",
@@ -15,7 +30,7 @@
     "hardhat",
     "hardhat-plugin"
   ],
-  "author": "",
+  "author": "Compound Labs, Inc.",
   "license": "MIT",
   "peerDependencies": {
     "hardhat": "^2.0.0"

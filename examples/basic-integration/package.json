@@ -1,0 +1,24 @@
+{
+  "name": "@compound-v3/basic-integration-example",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "test": "hardhat test",
+    "deploy": "hardhat run scripts/deploy.ts",
+    "interact": "hardhat run scripts/interact.ts"
+  },
+  "dependencies": {
+    "@compound-v3/contracts": "workspace:*",
+    "@compound-v3/hardhat-plugin": "workspace:*",
+    "@compound-v3/sdk": "workspace:*",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^6.0.0",
+    "@types/chai": "^5.2.2",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^20.11.24",
+    "hardhat": "^2.25.0",
+    "typescript": "^5.3.3"
+  }
+}

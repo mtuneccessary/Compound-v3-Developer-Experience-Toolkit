@@ -1,13 +1,29 @@
 {
-  "name": "compound3-contracts",
+  "name": "@compound-v3/contracts",
   "version": "0.1.0",
   "description": "Composable contracts for Compound v3",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "contracts",
+    "dist",
+    "artifacts",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "hardhat compile",
     "test": "hardhat test",
-    "clean": "hardhat clean"
+    "clean": "hardhat clean",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/compound-developers/compound-v3-developer-toolkit.git",
+    "directory": "packages/contracts"
   },
   "keywords": [
     "ethereum",
@@ -15,7 +31,7 @@
     "solidity",
     "smart-contracts"
   ],
-  "author": "",
+  "author": "Compound Labs, Inc.",
   "license": "MIT",
   "devDependencies": {
     "@nomicfoundation/hardhat-ethers": "^3.0.9",

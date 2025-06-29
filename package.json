@@ -1,0 +1,29 @@
+{
+  "name": "@compound-v3/developer-toolkit",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Developer toolkit for Compound v3",
+  "scripts": {
+    "build": "pnpm run -r build",
+    "test": "pnpm run -r test",
+    "clean": "pnpm run -r clean",
+    "prepare": "pnpm run build",
+    "publish-packages": "pnpm publish -r --access public",
+    "version-packages": "pnpm version-packages"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "keywords": [
+    "compound",
+    "defi",
+    "ethereum",
+    "developer-tools"
+  ],
+  "author": "Compound Labs, Inc.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/compound-developers/compound-v3-developer-toolkit.git"
+  }
+} 
