@@ -1,0 +1,13 @@
+{
+  "name": "hardhat-compound3",
+  "version": "0.1.0",
+  "description": "Hardhat plugin for Compound v3 testing.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo 'No tests specified'"
+  },
+  "keywords": ["hardhat", "plugin", "compound"],
+  "author": "",
+  "license": "MIT"
+} 

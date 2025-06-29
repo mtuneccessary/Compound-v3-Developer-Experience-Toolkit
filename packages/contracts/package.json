@@ -1,0 +1,13 @@
+{
+  "name": "compound-lego-contracts",
+  "version": "0.1.0",
+  "description": "Solidity contracts for Compound v3.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo 'No tests specified'"
+  },
+  "keywords": ["solidity", "contracts", "compound"],
+  "author": "",
+  "license": "MIT"
+} 

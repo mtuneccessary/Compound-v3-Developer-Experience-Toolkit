@@ -1,0 +1,13 @@
+{
+  "name": "@compound3/sdk",
+  "version": "0.1.0",
+  "description": "Type-Safe SDK for Compound v3.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo 'No tests specified'"
+  },
+  "keywords": ["compound", "sdk", "typescript"],
+  "author": "",
+  "license": "MIT"
+} 
