@@ -2,5 +2,7 @@
 pragma solidity ^0.8.25;
 
 library SafeRepay {
-    // Add your SafeRepay logic here
+    function repay(address asset, uint256 amount) external {
+        // Logic to safely repay the asset
+    }
 } 

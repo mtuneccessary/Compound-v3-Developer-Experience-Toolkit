@@ -1,13 +1,35 @@
 {
   "name": "hardhat-compound3",
   "version": "0.1.0",
-  "description": "Hardhat plugin for Compound v3 testing.",
-  "main": "index.js",
+  "description": "Hardhat plugin for Compound v3 development",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "echo 'No tests specified'"
+    "test": "jest",
+    "clean": "rimraf dist"
   },
-  "keywords": ["hardhat", "plugin", "compound"],
+  "keywords": [
+    "ethereum",
+    "compound",
+    "hardhat",
+    "hardhat-plugin"
+  ],
   "author": "",
-  "license": "MIT"
-} 
+  "license": "MIT",
+  "peerDependencies": {
+    "hardhat": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.24",
+    "hardhat": "^2.20.1",
+    "jest": "^29.7.0",
+    "rimraf": "^5.0.5",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "ethers": "^6.11.1"
+  }
+}

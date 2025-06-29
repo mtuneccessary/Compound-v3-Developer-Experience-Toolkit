@@ -7,7 +7,20 @@
     "build": "tsc",
     "test": "echo 'No tests specified'"
   },
-  "keywords": ["compound", "sdk", "typescript"],
+  "keywords": [
+    "compound",
+    "sdk",
+    "typescript"
+  ],
   "author": "",
-  "license": "MIT"
-} 
+  "license": "MIT",
+  "dependencies": {
+    "ethers": "^6.14.4"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.0.7",
+    "jest": "^30.0.3",
+    "ts-jest": "^29.4.0"
+  }
+}

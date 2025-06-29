@@ -2,5 +2,10 @@
 pragma solidity ^0.8.25;
 
 library BatchSupply {
-    // Add your BatchSupply logic here
+    function supply(address[] memory assets, uint256[] memory amounts) external {
+        require(assets.length == amounts.length, "Mismatched arrays");
+        for (uint256 i = 0; i < assets.length; i++) {
+            // Logic to supply each asset
+        }
+    }
 } 

@@ -1,13 +1,36 @@
 {
-  "name": "compound-lego-contracts",
+  "name": "compound3-contracts",
   "version": "0.1.0",
-  "description": "Solidity contracts for Compound v3.",
-  "main": "index.js",
+  "description": "Composable contracts for Compound v3",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "test": "echo 'No tests specified'"
+    "build": "hardhat compile",
+    "test": "hardhat test",
+    "clean": "hardhat clean"
   },
-  "keywords": ["solidity", "contracts", "compound"],
+  "keywords": [
+    "ethereum",
+    "compound",
+    "solidity",
+    "smart-contracts"
+  ],
   "author": "",
-  "license": "MIT"
-} 
+  "license": "MIT",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-ethers": "^3.0.9",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.13",
+    "@nomicfoundation/hardhat-toolbox": "^6.0.0",
+    "@types/chai": "^5.2.2",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^20.11.24",
+    "chai": "^5.2.0",
+    "ethers": "^6.14.4",
+    "hardhat": "^2.20.1",
+    "hardhat-chai-matchers": "^0.0.1",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.1"
+  }
+}
