@@ -1,81 +1,177 @@
-# Hardhat Compound v3 Plugin
+# Compound v3 Hardhat Plugin
 
-A Hardhat plugin for interacting with Compound v3 protocol. This plugin provides a set of utilities and tasks to make development with Compound v3 easier.
+A Hardhat plugin for Compound v3 development that provides helpers, fixtures, and utilities for testing and deployment.
 
 ## Installation
 
 ```bash
-npm install hardhat-compound3
-# or
-yarn add hardhat-compound3
-# or
-pnpm add hardhat-compound3
+npm install --save-dev @compound-v3/hardhat-plugin
 ```
 
 ## Configuration
 
-Add the following to your `hardhat.config.ts`:
+Add the plugin to your `hardhat.config.ts`:
 
 ```typescript
-import "hardhat-compound3";
+import '@compound-v3/hardhat-plugin';
 
 const config: HardhatUserConfig = {
-  // ... other config options ...
+  // ... your other config
   compound3: {
-    enableGasReport: true, // Optional: Enable gas reporting for Compound v3 transactions
+    // Optional: Override default market addresses
     markets: {
-      mainnet: "0xc3d688B66703497DAA19211EEdff47f25384cdc3",
-      goerli: "0x3EE77595A8459e93C2888b13aDB354017B198188",
-      // Add other network market addresses as needed
-    },
-  },
+      mainnet: {
+        USDC: '0x...',
+        // ... other markets
+      }
+    }
+  }
 };
 
 export default config;
 ```
 
+## Features
+
+- 🔧 Market interaction helpers
+- 📊 Account information utilities
+- 🧪 Testing utilities and fixtures
+- ⛽ Gas optimization tools
+- 🌐 Multi-chain support
+
 ## Usage
 
-Once installed and configured, you can access the Compound v3 helper through the Hardhat Runtime Environment:
+### Market Interaction
 
 ```typescript
-import { ethers } from "hardhat";
+import { ethers } from 'hardhat';
 
-async function main() {
-  // Get account information
-  const account = "0x1234...";
-  const accountInfo = await hre.compound3.getAccountInfo(account);
-  console.log("Account Info:", accountInfo);
+// Get market information
+const marketInfo = await hre.compound3.getMarketInfo('USDC');
 
-  // Supply assets
-  const signer = await ethers.getSigner();
-  const asset = "0x1234..."; // Asset address
-  const amount = ethers.parseUnits("100", 18);
-  await hre.compound3.supply(asset, amount, signer);
+// Get account information
+const accountInfo = await hre.compound3.getAccountInfo('0x...');
 
-  // Withdraw assets
-  await hre.compound3.withdraw(asset, amount, signer);
-}
+// Supply assets
+await hre.compound3.supply('USDC', ethers.parseUnits('1000', 6));
+
+// Get current rates
+const supplyRate = await hre.compound3.getSupplyRate();
+const borrowRate = await hre.compound3.getBorrowRate();
+```
+
+### Testing Utilities
+
+```typescript
+import { loadFixture } from '@nomicfoundation/hardhat-network-helpers';
+import { expect } from 'chai';
+
+describe('My Contract', function() {
+  // Use the compound3 fixture
+  async function deployFixture() {
+    const [owner, user] = await ethers.getSigners();
+    
+    // Get a Compound v3 market instance
+    const market = await hre.compound3.getMarket('USDC');
+    
+    // Deploy your contract
+    const MyContract = await ethers.getContractFactory('MyContract');
+    const myContract = await MyContract.deploy(market.address);
+    
+    return { market, myContract, owner, user };
+  }
+
+  it('should interact with Compound v3', async function() {
+    const { market, myContract, user } = await loadFixture(deployFixture);
+    
+    // Use the helper to supply assets
+    await hre.compound3.supply('USDC', ethers.parseUnits('1000', 6));
+    
+    // Test your contract
+    await myContract.connect(user).doSomething();
+    
+    // Verify the results
+    const accountInfo = await hre.compound3.getAccountInfo(user.address);
+    expect(accountInfo.collateralValue).to.be.gt(0);
+  });
+});
+```
+
+### Gas Optimization
+
+```typescript
+// Get gas estimates for operations
+const gasEstimate = await hre.compound3.estimateGas.supply('USDC', amount);
+
+// Get optimal gas price
+const gasPrice = await hre.compound3.getOptimalGasPrice();
+
+// Execute gas-optimized transaction
+await hre.compound3.executeWithOptimalGas(
+  market.supply(amount)
+);
 ```
 
 ## API Reference
 
-### `hre.compound3.getMarketAddress()`
+### Market Operations
 
-Returns the Compound v3 market address for the current network.
+- `getMarketInfo(asset: string): Promise<MarketInfo>`
+- `getAccountInfo(account: string): Promise<AccountInfo>`
+- `supply(asset: string, amount: BigNumberish): Promise<ContractTransaction>`
+- `withdraw(asset: string, amount: BigNumberish): Promise<ContractTransaction>`
+- `getSupplyRate(): Promise<BigNumber>`
+- `getBorrowRate(): Promise<BigNumber>`
 
-### `hre.compound3.getAccountInfo(account: string)`
+### Testing Utilities
 
-Returns account information including collateral value and borrow balance.
+- `getMarket(asset: string): Promise<Contract>`
+- `deployMockToken(name: string, symbol: string): Promise<Contract>`
+- `deployMockPriceFeed(price: BigNumberish): Promise<Contract>`
+- `impersonateAccount(address: string): Promise<SignerWithAddress>`
 
-### `hre.compound3.supply(asset: string, amount: bigint, signer: ethers.Signer)`
+### Gas Optimization
 
-Supply assets to Compound v3.
+- `estimateGas: { [key: string]: Function }`
+- `getOptimalGasPrice(): Promise<BigNumber>`
+- `executeWithOptimalGas(tx: Promise<any>): Promise<ContractTransaction>`
 
-### `hre.compound3.withdraw(asset: string, amount: bigint, signer: ethers.Signer)`
+## Types
 
-Withdraw assets from Compound v3.
+```typescript
+interface MarketInfo {
+  address: string;
+  baseToken: string;
+  baseTokenPriceFeed: string;
+  // ... other market info
+}
+
+interface AccountInfo {
+  collateralValue: BigNumberish;
+  borrowBalance: BigNumberish;
+}
+```
+
+## Development
+
+```bash
+# Install dependencies
+pnpm install
+
+# Build
+pnpm build
+
+# Run tests
+pnpm test
+
+# Run with coverage
+pnpm test:coverage
+```
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please read our [contributing guidelines](../../CONTRIBUTING.md) first.
+
+## License
+
+MIT License
