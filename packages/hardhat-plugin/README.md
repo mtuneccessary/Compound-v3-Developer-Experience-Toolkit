@@ -120,6 +120,10 @@ await hre.compound3.executeWithOptimalGas(
 - `getAccountInfo(account: string): Promise<AccountInfo>`
 - `supply(asset: string, amount: BigNumberish): Promise<ContractTransaction>`
 - `withdraw(asset: string, amount: BigNumberish): Promise<ContractTransaction>`
+- `borrow(asset: string, amount: BigNumberish): Promise<ContractTransaction>`
+- `repay(asset: string, amount: BigNumberish): Promise<ContractTransaction>`
+- `getMarketParameters(asset: string): Promise<MarketParameters>`
+- `getHealthFactor(account: string): Promise<BigNumber>`
 - `getSupplyRate(): Promise<BigNumber>`
 - `getBorrowRate(): Promise<BigNumber>`
 
@@ -149,6 +153,16 @@ interface MarketInfo {
 interface AccountInfo {
   collateralValue: BigNumberish;
   borrowBalance: BigNumberish;
+}
+
+interface MarketParameters {
+  borrowRate: BigNumberish;
+  supplyRate: BigNumberish;
+  collateralFactor: BigNumberish;
+  liquidationThreshold: BigNumberish;
+  reserveFactor: BigNumberish;
+  totalSupply: BigNumberish;
+  totalBorrow: BigNumberish;
 }
 ```
 
